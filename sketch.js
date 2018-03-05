@@ -12,6 +12,9 @@
 *  @github        https://github.com/matthias-jaeger-net/randomOscillator
 */
 
+
+/*  Variables */
+
 // Stores the four possible types of p5 oscillators
 let types = ["sawtooth", "square", "sine", "triangle"];
 
@@ -34,9 +37,11 @@ let step = 0;
 let output;
 
 
-// runs first
-function setup() {
 
+/*  Main */
+
+function setup() {
+   // p5 setup() runs first
    // no visuals needed
    noCanvas();
 
@@ -52,19 +57,19 @@ function setup() {
    }
 
    // Create random notes and save them in the four patterns
+   // createRandomNotes(steps, low, high, prob)
    patterns[0] = createRandomNotes(time, 10, 50, 0.4);
    patterns[1] = createRandomNotes(time, 90, 100, 0.6);
    patterns[2] = createRandomNotes(time, 100, 300, 0.4);
    patterns[3] = createRandomNotes(time, 100, 200, 0.8);
 }
 
-// Animation loop, runs countiously
 function draw() {
-
-   // play shorter patterns slower
+   // p5 draw() loops countiously
+   // Play shorter patterns slower
    frameRate(time);
 
-   // limit step to pattern length
+   // Limit step to pattern length
    if (step >= time) {
       step = 0;
    }
@@ -89,13 +94,15 @@ function draw() {
    step++;
 }
 
-// A function to create "some notes here and some notes there".
-function createRandomNotes(steps, low, high, prob) {
 
+/*  Functions */
+
+function createRandomNotes(steps, low, high, prob) {
+   // A function to create "some notes here and some notes there".
    // start with an empty list
    let arr = [];
 
-   // create random frequency value
+   // Create a randomized frequency value
    let a = floor(random(low, high));
 
    // b is "a bit higher, but low"
@@ -105,17 +112,18 @@ function createRandomNotes(steps, low, high, prob) {
    let i = steps;
 
    while (i--) {
-      // test random against given probabilty
       if (random() > prob) {
+         // test random against given probabilty
          // "some notes here"
+         // still a 50% chance of getting b
          if (random() > 0.5) {
-            // still a 50% chance of getting b
             arr[i] = a;
          } else {
             arr[i] = b;
          }
       } else {
-         // or create a 0
+         // or create a 0 else
+         // more 0 means calmer patterns
          arr[i] = 0;
       }
    }
