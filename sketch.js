@@ -13,8 +13,6 @@
 */
 
 
-/*  Variables */
-
 // Stores the four possible types of p5 oscillators
 let types = ["sawtooth", "square", "sine", "triangle"];
 
@@ -36,13 +34,8 @@ let step = 0;
 // p5 dom element
 let output;
 
-
-
-/*  Main */
-
 function setup() {
    // p5 setup() runs first
-   // no visuals needed
    noCanvas();
 
    // using p5 dom to create a <P>
@@ -94,9 +87,6 @@ function draw() {
    step++;
 }
 
-
-/*  Functions */
-
 function createRandomNotes(steps, low, high, prob) {
    // A function to create "some notes here and some notes there".
    // start with an empty list
@@ -130,21 +120,20 @@ function createRandomNotes(steps, low, high, prob) {
    return arr;
 }
 
-// Returns a p5 oscillator of given type
 function createOscillator(type) {
+   // Returns a p5 oscillator of given type
    let o = new p5.Oscillator();
    o.setType(type);
    o.start();
    return o;
 }
 
-// Renders the output string
 function renderOutput(element) {
-
+   // Renders the output string
    // Start with an empty string
    let string = "";
 
-   // Shows the patterns
+   // Add the patterns
    for (let i = 0; i < patterns.length; i++) {
       // of all four types
       string += "<b>" + types[i] + "</b> [ ";
